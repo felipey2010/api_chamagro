@@ -45,3 +45,16 @@ CREATE TABLE IF NOT EXISTS public.users (
 
 CREATE INDEX idx_users_email ON public.users (email);
 CREATE INDEX idx_role ON public.users (role);
+
+CREATE TABLE public.chamados (
+    id UUID PRIMARY KEY,
+    descricao VARCHAR(255) NOT NULL,
+    localizacao VARCHAR(255) NOT NULL,
+    central VARCHAR(255) NOT NULL,
+    outrosInteressados VARCHAR(255),
+    date_created TIMESTAMP DEFAULT current_timestamp,
+    updated_at timestamp,
+    owner_id uuid not null,
+    status VARCHAR(50) NOT NULL,
+    foreign key (owner_id) references public.users(id) on delete cascade
+);
